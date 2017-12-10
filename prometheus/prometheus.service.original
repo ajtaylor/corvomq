@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus server
+After=network.target
+
+[Service]
+#WorkingDirectory=/opt/gocode/src/github.com/prometheus/prometheus/
+Restart=on-failure
+ExecStart=/opt/prometheus-1.4.1.linux-amd64/prometheus \
+    #-storage.local.path=/var/lib/prometheus/data \
+    -config.file=/opt/prometheus-1.4.1.linux-amd64/prometheus.yml \
+    #-alertmanager.url=http://localhost:9093/alert-manager \
+    #-web.external-url=http://192.168.0.1/prometheus/
+#User=prometheus
+
+[Install]
+WantedBy=multi-user.target

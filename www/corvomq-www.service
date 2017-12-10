@@ -1,0 +1,22 @@
+[Unit]
+Description=CorvoMQ WWW service
+ConditionPathExists=/srv/corvomq/www/www
+ConditionPathExists=/var/log/corvomq/www/
+After=network.target
+ 
+[Service]
+Type=simple
+#User=corvomq-www
+#Group=corvomq-www
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+StartLimitInterval=15
+StartLimitBurst=5
+
+WorkingDirectory=/srv/corvomq/www
+ExecStart=/srv/corvomq/www/www -port 8000
+ 
+[Install]
+WantedBy=multi-user.target

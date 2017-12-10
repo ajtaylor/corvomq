@@ -1,0 +1,22 @@
+[Unit]
+Description=CorvoMQ API service
+ConditionPathExists=/srv/corvomq/api/api
+ConditionPathExists=/var/log/corvomq/api/
+After=network.target
+ 
+[Service]
+Type=simple
+#User=corvomq-api
+#Group=corvomq-api
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+StartLimitInterval=15
+StartLimitBurst=5
+
+WorkingDirectory=/srv/corvomq/api
+ExecStart=/srv/corvomq/api/api
+ 
+[Install]
+WantedBy=multi-user.target

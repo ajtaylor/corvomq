@@ -1,0 +1,34 @@
+doctype html
+html.has-navbar-fixed-top
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title CorvoMQ &middot Messaging &amp; Queueing
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css")
+    link(href='https://fonts.googleapis.com/css?family=Cantarell', rel='stylesheet', type='text/css')
+    link(rel="stylesheet", href="/static/css/corvomq.css")
+  body
+    nav.navbar.is-fixed-top.has-shadow
+      div.container
+        div.navbar-brand
+          a.navbar-item CorvoMQ
+        div.navbar-menu
+          div.navbar-start
+            a.navbar-item(href="/") Home
+            a.navbar-item(href="/features") Features
+            a.navbar-item(href="/pricing") Pricing
+            a.navbar-item(href="/documentation") Documentation
+            a.navbar-item(href="/about") About
+          div.navbar-end
+            div.navbar-item
+              div.field.is-grouped
+                p.control
+                  a.button.is-info.is-outlined(href="/register") Register
+                p.control
+                  a.button.is-success.is-outlined(href="/login") Login
+    div
+      block content
+    footer.footer
+      .container
+        .content
+          p footer

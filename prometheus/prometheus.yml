@@ -1,0 +1,76 @@
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'prometheus-server'
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - "/opt/prometheus-1.4.1.linux-amd64/rules/alerts/*.rules"
+  # - "second.rules"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    scrape_interval: 5s
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node'
+    scrape_interval: 3s
+
+    file_sd_configs:
+      - files:
+        - /opt/prometheus-1.4.1.linux-amd64/service_discovery/node_exporter/sd_*.json
+
+    # dns_sd_configs:
+    #   - refresh_interval: 15s
+    #   - type: 'A'
+    #   - port: 9100
+    #     names:
+    #       - 'corvomq.com'
+
+  - job_name: 'nats'
+    scrape_interval: 3s
+
+    file_sd_configs:
+      - files:
+        - /opt/prometheus-1.4.1.linux-amd64/service_discovery/nats_exporter/sd_*.json
+
+  # - job_name: 'blackbox'
+  #   metrics_path: /probe
+  #   params:
+  #     module: [ssh_banner]
+
+  #   file_sd_configs:
+  #     - files:
+  #       - ./service_discovery/sd_*.json
+
+  #   relabel_configs:
+  #     # Ensure port is 29000, pass as URL parameter
+  #     - source_labels: [__address__]
+  #       regex: (.*)(:.*)?
+  #       replacement: ${1}:29000
+  #       target_label: __param_target
+  #     # Make instance label the target
+  #     - source_labels: [__param_target]
+  #       target_label: instance
+  #     # Actually talk to the blackbox exporter though
+  #     - target_label: __address__
+  #       replacement: 127.0.0.1:9115
+
+#alertmanager_config:
+#  static_configs:
+#    - targets: ['localhost:9093']

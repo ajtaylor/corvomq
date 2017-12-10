@@ -1,0 +1,28 @@
+apt-get update
+dpkg-reconfigure tzdata -> UTC
+apt-get -y install cloud-init
+mkdir -p /var/lib/cloud/seed/nocloud-net
+echo "local-hostname: localhost" > /var/lib/cloud/seed/nocloud-net/meta-data
+echo "instance-id: usermq-001" > /var/lib/cloud/seed/nocloud-net/meta-data
+
+cat << EOF > /var/lib/cloud/seed/nocloud-net/user-data
+#cloud-config
+
+runcmd:
+  - 'echo ===== CorvoMQ ====='
+  - /opt/get_files
+EOF
+
+rm -rf /var/lib/cloud/instance/*
+
+scp ~/gocode/src/github.com/ajtaylor/corvomq/usermq/get_files root@xxx.xxx.xxx.xxx:/opt/
+
+
+
+
+
+
+
+
+crontab -e
+* * * * * /opt/get_files

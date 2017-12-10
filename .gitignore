@@ -1,0 +1,41 @@
+ENV_VARS
+
+prometheus/grafana
+
+queue/authz
+queue/workers/createVM.gox
+
+# build
+build/
+
+.vscode/
+
+node_modules/
+
+# log is a test project
+log/
+
+# css
+css/bulma/
+css/tachyons/
+css/dist/
+css/wysiwyg/
+css/wt
+
+# sqitch
+db/sqitch.conf
+
+# salt
+salt-server/
+
+# vpsnet
+vpsnet/
+
+# webapp
+webapp/node_modules/
+webapp/dist/
+webapp/html/
+
+# www
+www/html/
+www/node_modules/

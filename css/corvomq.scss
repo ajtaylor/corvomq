@@ -1,0 +1,48 @@
+@import "./bulma/sass/utilities/initial-variables";
+
+$input-shadow: none;
+
+@import "./bulma/bulma";
+
+@import "./corvomq/max-widths";
+@import "./corvomq/spacing";
+
+html,
+body {
+  /* font-family: 'Oxygen'; */
+  font-family: 'Cantarell';
+  margin: 0;
+  padding: 0;
+}
+
+/* Hiding the radiobuttons & checkboxes */
+input[type="radio"], input[type="checkbox"] {
+  display: none;
+}
+/* Hiding the "check" status of inputs */
+input[type="radio"] + label .fa-dot-circle-o,
+input[type="checkbox"] + label .fa-check-square  {
+  display: none;
+}
+/* Styling the "check" status */
+input[type="radio"]:checked + label .fa-dot-circle-o,
+input[type="checkbox"]:checked + label .fa-check-square {
+  display: block;
+/*color: DarkTurquoise;*/
+}
+/* Styling checkboxes */
+input[type="checkbox"]:checked + label .fa-check-square {
+  position: relative;
+  // left: .125em;
+  // bottom: .125em;
+}
+/* Styling radiobuttons */
+input[type="radio"]:checked + label .fa-circle-o {
+  display: none;
+}
+
+h6 {
+  @extend .has-text-weight-bold;
+}
+
+@import "./wysiwyg/wysiwyg";

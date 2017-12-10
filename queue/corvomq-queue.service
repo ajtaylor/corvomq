@@ -1,0 +1,21 @@
+[Unit]
+Description=CorvoMQ Worker Queue service
+ConditionPathExists=/srv/corvomq/queue/queue
+ConditionPathExists=/var/log/corvomq/queue/
+After=network.target
+ 
+[Service]
+Type=simple
+#User=corvomq-queue
+#Group=corvomq-queue
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+startLimitIntervalSec=60
+
+WorkingDirectory=/srv/corvomq/queue
+ExecStart=/srv/corvomq/queue/queue
+ 
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+%syntax-version=1.0.0-b2
+%project=corvomq
+%uri=http://corvomq.com
+
+appschema 2017-07-29T17:01:45Z Tony Taylor <antony.taylor@gmail.com> # Add schema for corvomq project.
+organisation [appschema] 2017-07-29T17:29:13Z Tony Taylor <antony.taylor@gmail.com> # Creates table to track organisations.
+appuser [appschema organisation] 2017-07-29T17:34:51Z Tony Taylor <antony.taylor@gmail.com> # Creates table to track users.
+register_organisation [appuser organisation] 2017-07-30T09:19:09Z Tony Taylor <antony.taylor@gmail.com> # Function for registering.
+login_appuser [appuser organisation] 2017-07-30T10:59:19Z Tony Taylor <antony.taylor@gmail.com> # Function for logging in.
+environment [appschema] 2017-08-31T21:00:01Z Tony Taylor <antony.taylor@gmail.com> # Creates table for Environments.
+environment_free_config [appschema] 2017-08-31T21:19:29Z Tony Taylor <antony.taylor@gmail.com> # Creates table for free environment config.
+appuser_get_environments [appschema] 2017-09-08T06:29:04Z Tony Taylor <antony.taylor@gmail.com> # Returns list of environments.
+environment_status [appschema] 2017-10-10T19:28:04Z Tony Taylor <antony.taylor@gmail.com> # Standing data: environment statuses.
+populate_environment_status [environment_status] 2017-10-10T19:29:04Z Tony Taylor <antony.taylor@gmail.com> # Standing data: populate environment status.
+create_environment [environment environment_status] 2017-10-10T21:14:19Z Tony Taylor <antony.taylor@gmail.com> # Creates user environment.

@@ -1,0 +1,29 @@
+extends ./layout/layout
+
+block content
+  section.section.hero.is-info
+    div.hero-body
+      div.container
+        h2.title.is-size-2 CorvoMQ
+        h4.subtitle.is-size-4 A modern messaging platform
+        h5.is-size-5 We provide a simple &amp; flexible service for teams that want to deliver scalable &amp; efficient systems
+    div.hero-foot.has-text-centered
+      a.button.is-info.is-inverted.is-medium(href="/register") Get started
+  section.section.content
+    .level
+      .level-item
+        .content
+          h4.is-size-3 A central nervous system for your application stack
+    .columns.is-variable.is-8
+      .column
+        .has-text-centered
+          h5.is-size-5 Decouple
+          p Decouple your application stack. CorvoMQ is the communication backbone for your services and components.
+      .column
+        .has-text-centered
+          h5.is-size-5 Infrastructure
+          p Choose either standalone, standalone with failover or cluster. Our cluster infrastructure means that there is no single point of failure. If one of your cluster nodes fails, it is replaced automatically while the rest of the cluster remains available.
+      .column
+        .has-text-centered
+          h5.is-size-5 Performant
+          p CorvoMQ is fast - we've got benchmarks at over 350,000 messages a second.

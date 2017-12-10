@@ -1,0 +1,97 @@
+#cloud-config
+
+packages:
+  - ufw
+  - unzip
+  - ntp
+
+write_files:
+  - content: |
+      net: '0.0.0.0'
+      port: 4222
+      http_port: 8222
+      {{if .TLSEnabled}}
+      tls {
+          cert_file: "/srv/nats/priv/gnatsd.crt"
+          key_file: "/srv/nats/priv/gnatsd.key"
+          timeout: 5
+      }
+      {{end}}
+      authorization {
+        user: {{.Username}}
+        password: {{.Password}}
+      }
+    path: /srv/nats/gnatsd.conf
+  - content: |
+      [Unit]
+      Description=NATS messaging server
+
+      [Service]
+      ExecStart=/srv/nats/bin/gnatsd -c /srv/nats/gnatsd.conf
+      User=nats
+      Restart=on-failure
+
+      [Install]
+      WantedBy=multi-user.target
+    path: /etc/systemd/system/nats.service
+  - content: |
+      [Unit]
+      Description=Prometheus node exporter
+      After=local-fs.target network-online.target network.target
+      Wants=local-fs.target network-online.target network.target
+
+      [Service]
+      ExecStart=/srv/prometheus/node_exporter/node_exporter-0.14.0.linux-amd64/node_exporter
+      Restart=on-failure
+      Type=simple
+
+      [Install]
+      WantedBy=multi-user.target
+    path: /etc/systemd/system/node_exporter.service
+  - content: |
+      [Unit]
+      Description=Prometheus nats exporter
+      After=local-fs.target network-online.target network.target
+      Wants=local-fs.target network-online.target network.target
+
+      [Service]
+      ExecStart=/srv/prometheus/nats_exporter/prometheus-nats-exporter -varz -connz -routez -subz "http://%H:8222"
+      Restart=on-failure
+      Type=simple
+
+      [Install]
+      WantedBy=multi-user.target
+    path: /etc/systemd/system/nats_exporter.service
+
+runcmd:
+  - adduser --system --group --no-create-home --shell /bin/false nats
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow 22/tcp
+  - ufw allow 4222/tcp
+  - ufw allow 7777/tcp
+  - ufw allow 9100/tcp
+  - echo "y" | ufw enable
+  - mkdir -p /srv/nats/bin
+  - wget https://github.com/nats-io/gnatsd/releases/download/v1.0.2/gnatsd-v1.0.2-linux-amd64.zip -P /srv/nats
+  - unzip /srv/nats/gnatsd-v1.0.2-linux-amd64.zip -d /srv/nats/
+  - rm /srv/nats/gnatsd-v1.0.2-linux-amd64.zip
+  - mv /srv/nats/gnatsd-v1.0.2-linux-amd64/gnatsd /srv/nats/bin/
+  - 'chown -R nats:nats /srv/nats'
+  - chown nats /srv/nats/gnatsd.conf
+  - chmod 400 /srv/nats/gnatsd.conf
+  - mkdir -p /srv/prometheus/node_exporter
+  - wget https://github.com/prometheus/node_exporter/releases/download/v0.14.0/node_exporter-0.14.0.linux-amd64.tar.gz -P /srv/prometheus/node_exporter
+  - tar -xf /srv/prometheus/node_exporter/node_exporter-0.14.0.linux-amd64.tar.gz -C /srv/prometheus/node_exporter/
+  - rm /srv/prometheus/node_exporter/node_exporter-0.14.0.linux-amd64.tar.gz
+  - mkdir -p /srv/prometheus/nats_exporter
+  - wget http://88.202.190.26/download/prometheus-nats-exporter.gz -P /srv/prometheus/nats_exporter
+  - gzip -d /srv/prometheus/nats_exporter/prometheus-nats-exporter.gz
+  - chmod +x /srv/prometheus/nats_exporter/prometheus-nats-exporter
+  - systemctl daemon-reload
+  - systemctl enable nats.service
+  - systemctl start --no-block nats.service
+  - systemctl enable node_exporter.service
+  - systemctl start --no-block node_exporter.service
+  - systemctl enable nats_exporter.service
+  - systemctl start --no-block nats_exporter.service

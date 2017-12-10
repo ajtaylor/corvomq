@@ -1,0 +1,2 @@
+ALERT InstanceDown
+  IF up{job="node"} == 0

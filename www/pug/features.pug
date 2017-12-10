@@ -1,0 +1,60 @@
+extends ./layout/layout
+
+block content
+  section.section.hero.is-info
+    div.hero-head
+      div.container
+        h2.title.is-size-2 CorvoMQ
+    div.hero-body
+      div.container
+        .columns
+          .column.is-half
+            h5.title.is-size-5 With flexible deployment options and great language support, CorvoMQ caters for your team's skill set and all your Development, Test and Production environments.
+  section.section.content
+    h3.is-size-3.has-text-info.has-text-centered Choice of infrastructure
+    //- a.is-success Learn more about infrastructure
+    //- p.is-size-6 None of our infrastructure options are shared instances. All traffic through your message server is yours and yours alone.
+    //- p.has-text-weight-semibold None of our infrastructure options are shared instances. All traffic through your message server is yours and yours alone.
+    //- .notification None of our infrastructure options are shared instances. All traffic through your message server is yours and yours alone.
+    //- .notification.is-warning None of our infrastructure options are shared instances. All traffic through your message server is yours and yours alone.
+    //- .notification.is-link None of our infrastructure options are shared instances. All traffic through your message server is yours and yours alone.
+    .columns
+      .column
+        h5.is-size-5 Standalone
+        p A standalone instance is our simplest set up. There is no failover and no availability guarantee. Would suit proof of concept work.
+      .column
+        h5.is-size-5 Standalone with failover
+        p Our automatic failover will ensure that you only suffer a few minutes downtime if the primary instance fails. Probably best for Development or Test environments.
+      .column
+        h5.is-size-5 Cluster
+        p Choose a cluster instance when you need high availability. There is no single point of failure, and any failed nodes are replaced automatically. Built for your Production environment.
+    .notification.is-warning.has-text-centered None of our infrastructure options are shared instances. All traffic through your message server is yours and yours alone.
+    .columns.is-variable.is-8.pt5
+      .column.is-half
+        h3.is-size-3.has-text-info Unlimited traffic
+        p Set traffic limits depending on your requirements. Each instance includes 1TB of outgoing message data. Upgrade to unlimited traffic as your message volume increases.
+      .column.is-half
+        h3.is-size-3.has-text-info Language support
+        p There are several client libraries available to connect to your CorvoMQ instance. We support the following languages:
+        .columns
+          .column.is-half
+            ul
+              li C#
+              li Java
+              li Go
+          .column.is-half
+            ul
+              li Node.js
+              li Python
+              li Ruby
+    h3.is-size-3.pt5.has-text-info.has-text-centered Messaging patterns
+    .columns
+      .column
+        h5.is-size-5 Publish subscribe
+        p A simple pattern - all subscribers to a particular subject receive all messages posted to that subject.
+      .column
+        h5.is-size-5 Request Reply
+        p A request client sends out a payload on a given subject. Reply clients listen on that subject, and the request client will return the first reply it receives.
+      .column
+        h5.is-size-5 Queue Group
+        p Several subscribers listen to a particular subject. As messages on the registered subject are published, one member of the group is chosen randomly to receive the message. Although queue groups have multiple subscribers, each message is consumed by only one.

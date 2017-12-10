@@ -1,0 +1,2 @@
+ALERT CpuPressure
+  IF rate(node_cpu{instance="31.24.230.124:9100",mode="idle"}[1m]) < 0.95

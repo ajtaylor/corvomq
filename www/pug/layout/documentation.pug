@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title CorvoMQ &middot Messaging &amp; Queueing
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css")
+    link(href='https://fonts.googleapis.com/css?family=Cantarell', rel='stylesheet', type='text/css')
+    link(rel="stylesheet", href="/static/css/corvomq.css")
+  body
+    div.container
+      div.columns
+        div#doc-contents.column.is-one-quarter
+          include ../documentation/contents
+          p #{filename.substring(1).replace('pug', 'html')}
+        div#doc-content.column
+          block content
+  script.
+    var xhr = new XMLHttpRequest();
+
+    var nodes = document.querySelectorAll('a.tta-doc-menu-item');
+    
+    [].forEach.call(nodes, function(node) {
+      node.addEventListener('click', function(event) {
+        [].forEach.call(nodes, function(node) {
+          node.classList.remove('is-active');
+          console.log(node.id);
+        })
+        event.srcElement.classList.add('is-active');
+      })
+    });

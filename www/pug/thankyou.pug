@@ -1,0 +1,18 @@
+extends ./layout/layout
+
+block content
+  section
+    .container
+      h5.title.is-size5 Thank you
+      .content
+        p Thank you for registering your CorvoMQ account.
+        h4.is-size-4 Logging in
+        p You can login using the email and password you registered with #[a(href="/login") here].
+        h4.is-size-4 Your free environment
+        p We have set up your credentials for access to our free message server. You can find these credentials in your list of Environments when you #[a(href="/login") log in].
+        p See our #[a(href="/documentation") Documentation] for information on how to use the free message server.
+        strong Please note
+        ul
+          li We do not guarantee the availability nor the performance of our free message server.
+          li Traffic to and from our free message server is not encrypted.
+          li The maximum message size for our free message server is 128 bytes.

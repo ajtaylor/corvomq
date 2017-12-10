@@ -1,0 +1,8 @@
+sudo mkdir -p /var/log/corvomq/api/
+
+sudo adduser -r -M -s /bin/nologin corvomq-api
+
+sudo chown -R corvomq-api:corvomq-api /var/log/corvomq/
+
+sudo mv corvomq-api.service /lib/systemd/system/.
+sudo chmod 755 /lib/systemd/system/corvomq-api.service

@@ -1,0 +1,52 @@
+aside.menu
+  -
+    var contents = [{type: 'label',
+                      text: 'Introduction',
+                      itemList: [
+                        {type: 'list',
+                        itemList: [
+                          {type: 'item', text: 'Overview', href: 'overview'},
+                          {type: 'item', text: 'Getting started',
+                            itemList: [
+                              {type: 'list',
+                                itemList: [
+                                  {type: 'item', text: 'Free environment'},
+                                  {type: 'item', text: 'Simple producer'},
+                                  {type: 'item', text: 'Simple consumer'}
+                              ]}
+                            ]}
+                          ]
+                        }]
+                      },
+                      {type: 'label',
+                        text: 'Server types',
+                        itemList: [
+                          {type: 'list',
+                            itemList: [
+                              {type: 'item', text: 'Message server'},
+                              {type: 'item', text: 'Queue server'}
+                            ]}
+                        ]}]
+  .
+    !{indenter(contents)}
+  p.menu-label Introduction
+  ul.menu-list
+    li
+      a.tta-doc-menu-item(href="#overview") Overview
+    li
+      a.tta-doc-menu-item(href="#getting-started") Getting started
+      ul.menu-list
+        li
+          a.tta-doc-menu-item(href="#getting-started_free-environment") Free environment
+        li
+          a.tta-doc-menu-item(href="#getting-started_add-message-server") Add a message server
+        li
+          a.tta-doc-menu-item(href="#getting-started_simple-producer") A simple producer
+        li
+          a.tta-doc-menu-item(href="#getting-started_simple-consumer") A simple consumer
+  p.menu-label Server types
+  ul.menu-list
+    li
+      a.tta-doc-menu-item(href="#server-types_message-server") Message server
+    li
+      a.tta-doc-menu-item(href="#server-types_queue-server") Queue server

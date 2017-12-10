@@ -1,0 +1,28 @@
+{
+  "name": "corvomq-webapp",
+  "version": "1.0.0",
+  "description": "CorvoMQ Web Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@cerebral/firebase": "0.0.0-beta.2",
+    "@cerebral/forms": "0.0.0-beta.2",
+    "@cerebral/http": "0.0.0-beta.2",
+    "@cerebral/router": "0.0.0-beta.2",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-builtin-extend": "1.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "cerebral": "^2.0.0-beta.2",
+    "inferno": "^3.0.4",
+    "inferno-component": "^3.0.5",
+    "inferno-hyperscript": "^3.0.5",
+    "typescript": "^2.2.2",
+    "webpack": "^2.4.1"
+  }
+}
