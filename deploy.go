@@ -145,7 +145,7 @@ func deployDocumentation(env []string) {
 	// Make documentation directory
 	os.MkdirAll(target+"/www/html/documentation", os.ModePerm)
 	// Clear documentation directory
-	cmd = exec.Command("/bin/sh", "-c", "rm -r "+target+"/www/html/documentation/*")
+	cmd = exec.Command("/bin/sh", "-c", "rm -r "+target+"/www/html/documentation/")
 	runCmd(s, cmd)
 	// Move HTML to website
 	cmd = exec.Command("/bin/sh", "-c", "mv ../html/documentation/ "+target+"/www/html/")

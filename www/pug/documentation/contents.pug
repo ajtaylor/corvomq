@@ -2,17 +2,18 @@ aside.menu
   -
     var contents = [{type: 'label',
                       text: 'Introduction',
+                      href: 'introduction',
                       itemList: [
                         {type: 'list',
                         itemList: [
                           {type: 'item', text: 'Overview', href: 'overview'},
-                          {type: 'item', text: 'Getting started',
+                          {type: 'item', text: 'Getting started', href: 'getting-started',
                             itemList: [
                               {type: 'list',
                                 itemList: [
-                                  {type: 'item', text: 'Free environment'},
-                                  {type: 'item', text: 'Simple producer'},
-                                  {type: 'item', text: 'Simple consumer'}
+                                  {type: 'item', text: 'Free environment', anchor: 'free-environment'},
+                                  {type: 'item', text: 'Simple producer', anchor: 'simple-producer'},
+                                  {type: 'item', text: 'Simple consumer', anchor: 'simple-consumer'}
                               ]}
                             ]}
                           ]
@@ -20,33 +21,13 @@ aside.menu
                       },
                       {type: 'label',
                         text: 'Server types',
+                        href: 'server-types',
                         itemList: [
                           {type: 'list',
                             itemList: [
-                              {type: 'item', text: 'Message server'},
-                              {type: 'item', text: 'Queue server'}
+                              {type: 'item', text: 'Message server', href: 'message-server'},
+                              {type: 'item', text: 'Queue server', href: 'queue-server'}
                             ]}
                         ]}]
   .
-    !{indenter(contents)}
-  p.menu-label Introduction
-  ul.menu-list
-    li
-      a.tta-doc-menu-item(href="#overview") Overview
-    li
-      a.tta-doc-menu-item(href="#getting-started") Getting started
-      ul.menu-list
-        li
-          a.tta-doc-menu-item(href="#getting-started_free-environment") Free environment
-        li
-          a.tta-doc-menu-item(href="#getting-started_add-message-server") Add a message server
-        li
-          a.tta-doc-menu-item(href="#getting-started_simple-producer") A simple producer
-        li
-          a.tta-doc-menu-item(href="#getting-started_simple-consumer") A simple consumer
-  p.menu-label Server types
-  ul.menu-list
-    li
-      a.tta-doc-menu-item(href="#server-types_message-server") Message server
-    li
-      a.tta-doc-menu-item(href="#server-types_queue-server") Queue server
+    !{indenter(filename, contents)}
