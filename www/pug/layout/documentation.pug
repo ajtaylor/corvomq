@@ -8,12 +8,17 @@ html
     link(href='https://fonts.googleapis.com/css?family=Cantarell', rel='stylesheet', type='text/css')
     link(rel="stylesheet", href="/static/css/corvomq.css")
   body
-    div.container
-      div.columns
-        div#doc-contents.column.is-one-quarter
-          include ../documentation/contents
-        div#doc-content.column
-          block content
+    section.hero
+      div.hero-head
+        div.container
+          h3.is-size-3.has-text-info CorvoMQ
+      div.hero-body
+        div.container
+          div.columns
+            div#doc-contents.column.is-one-quarter
+              include ../documentation/contents
+            div#doc-content.column.is-two-thirds-desktop.pl5.content
+              block content
   script.
     var xhr = new XMLHttpRequest();
 

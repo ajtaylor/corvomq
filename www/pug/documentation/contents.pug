@@ -12,22 +12,57 @@ aside.menu
                               {type: 'list',
                                 itemList: [
                                   {type: 'item', text: 'Free environment', anchor: 'free-environment'},
-                                  {type: 'item', text: 'Simple producer', anchor: 'simple-producer'},
-                                  {type: 'item', text: 'Simple consumer', anchor: 'simple-consumer'}
+                                  {type: 'item', text: 'A simple producer', anchor: 'simple-producer'},
+                                  {type: 'item', text: 'A simple consumer', anchor: 'simple-consumer'}
                               ]}
                             ]}
                           ]
                         }]
                       },
                       {type: 'label',
-                        text: 'Server types',
-                        href: 'server-types',
+                        text: 'Message concepts',
+                        href: 'message-concepts',
+                        itemList: [
+                          {type: 'list',
+                            itemList: [
+                              {type: 'item', text: 'Messaging', href: 'messaging'},
+                              {type: 'item', text: 'Publish Subscribe', href: 'publish-subscribe'},
+                              {type: 'item', text: 'Request Reply', href: 'request-reply'},
+                              {type: 'item', text: 'Queue Groups', href: 'queue-groups'}
+                            ]}
+                        ]},
+                      {type: 'label',
+                        text: 'Servers',
+                        href: 'servers',
                         itemList: [
                           {type: 'list',
                             itemList: [
                               {type: 'item', text: 'Message server', href: 'message-server'},
-                              {type: 'item', text: 'Queue server', href: 'queue-server'}
+                              {type: 'item', text: 'Queue server', href: 'queue-server'},
+                              {type: 'item', text: 'Monitoring', href: 'monitoring'}
+                            ]}
+                        ]},
+                      {type: 'label',
+                        text: 'Infrastructure',
+                        href: 'infrastructure',
+                        itemList: [
+                          {type: 'list',
+                            itemList: [
+                              {type: 'item', text: 'Standalone', href: 'standalone'},
+                              {type: 'item', text: 'Standalone with failover', href: 'standalone-with-failover'},
+                              {type: 'item', text: 'Cluster', href: 'cluster'}
+                            ]}
+                        ]},
+                      {type: 'label',
+                        text: 'Tutorials',
+                        href: 'tutorials',
+                        itemList: [
+                          {type: 'list',
+                            itemList: [
+                              {type: 'item', text: 'Publish Subscribe', href: 'publish-subscribe-tutorial'},
+                              {type: 'item', text: 'Request Reply', href: 'request-reply-tutorial'},
+                              {type: 'item', text: 'Queuing', href: 'queuing-tutorial'}
                             ]}
                         ]}]
   .
-    !{indenter(filename, contents)}
+    !{menuOut(filename, contents)}

@@ -45,4 +45,8 @@ h6 {
   @extend .has-text-weight-bold;
 }
 
+#doc-content h3 {
+  @extend .has-text-info;
+}
+
 @import "./wysiwyg/wysiwyg";

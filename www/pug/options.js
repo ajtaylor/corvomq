@@ -1,6 +1,6 @@
 const pug = require('pug')
 
-var tt = function(filename, list, indentLevel = 0, hrefParent = '/documentation') {
+var renderMenu = function(filename, list, indentLevel = 0, hrefParent = '/documentation') {
   var str = '';
   var indentStr = '  ';
   var indentation = indentStr.repeat(indentLevel);
@@ -24,14 +24,14 @@ var tt = function(filename, list, indentLevel = 0, hrefParent = '/documentation'
         break;
     }
     if (list[i].itemList != undefined && list[i].itemList.length > 0) {
-      str += tt(filename, list[i].itemList, indentLevel + 1, href);
+      str += renderMenu(filename, list[i].itemList, indentLevel + 1, href);
     }
   }
   return str;
 }
 
-var tt1 = function(filename, list, indentLevel = 0) {
-  return pug.render(tt(filename, list, indentLevel));
+var wrapper = function(filename, list, indentLevel = 0) {
+  return pug.render(renderMenu(filename, list, indentLevel));
 }
 
-exports.indenter = tt1
+exports.menuOut = wrapper
