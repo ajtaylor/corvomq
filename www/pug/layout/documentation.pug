@@ -7,18 +7,22 @@ html
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css")
     link(href='https://fonts.googleapis.com/css?family=Cantarell', rel='stylesheet', type='text/css')
     link(rel="stylesheet", href="/static/css/corvomq.css")
+    link(rel="stylesheet", href="/static/css/highlightjs/default.css")
   body
-    section.hero
-      div.hero-head
-        div.container
-          h3.is-size-3.has-text-info CorvoMQ
-      div.hero-body
-        div.container
-          div.columns
-            div#doc-contents.column.is-one-quarter
-              include ../documentation/contents
-            div#doc-content.column.is-two-thirds-desktop.pl5.content
-              block content
+    //- section.hero
+    //-   div.hero-head
+    div.container.pb4
+      h3.is-size-3.has-text-info CorvoMQ
+      //- div.hero-body
+    div.container
+      div.columns
+        div#doc-contents.column.is-one-quarter
+          include ../documentation/contents
+        div#doc-content.column.is-two-thirds-desktop.pl5
+          block content
+  script(src="/static/javascript/highlight.pack.js")
+  script.
+    hljs.initHighlightingOnLoad();
   script.
     var xhr = new XMLHttpRequest();
 
@@ -33,3 +37,23 @@ html
         event.srcElement.classList.add('is-active');
       })
     });
+
+    function showCode(language) {
+      var elements = document.getElementsByClassName('code-item');
+      var l = elements.length;
+      for (var i = 0; i < l; i++) {
+        switch(elements[i].tagName) {
+          case 'LI':
+            elements[i].classList.remove('is-active');
+            if (elements[i].classList.contains(language)) {
+              elements[i].classList.add('is-active');
+            }
+            break;
+          case 'PRE':
+            elements[i].classList.remove('is-hidden');
+            if (!elements[i].classList.contains(language)) {
+              elements[i].classList.add('is-hidden');
+            }
+        }
+      };
+    }

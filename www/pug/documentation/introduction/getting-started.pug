@@ -1,9 +1,176 @@
 extends ../../layout/documentation
 
 block content
-  h3 Getting started
-  h4 Free environment
-  p As soon as you register your account you will have a channel on our free Proof of Concept message server. Your username, password and channel are available on your Dashboard.
-  p It's important to remember that our free message server does not guarantee availability nor any throughput volumes. It's a shared server and there will be other producers and consumers using it.
-  h4 A simple producer
-  h4 A simple consumer
+  div.content
+    h3 Getting started
+    h4 Free environment
+    p As soon as you register your account you will have a channel on our free Proof of Concept message server. Your username, password and channel are available on your Dashboard.
+    p TODO: screenshot of free environment.
+    p It's important to remember that our free message server does not guarantee availability nor any throughput volumes. It's a shared server and there will be other producers and consumers using it.
+    h4 A simple producer
+  div.tabs
+    ul.tab-list.code-container
+      li.is-active.code-item.go(onClick="showCode('go');")
+        a Go
+      li.code-item.java(onClick="showCode('java');")
+        a Java
+      li.code-item.csharp(onClick="showCode('csharp');")
+        a C#
+  div.code-container
+    pre.code-item.go
+      code.go
+        | package main
+        |
+        | import (
+        |         "log"
+        |
+        |         "github.com/nats-io/go-nats"
+        | )
+        |
+        | func main() {
+        |   nc, err := nats.Connect(*urls)
+        |   if err != nil {
+        |     log.Fatal(err)
+        |   }
+        |
+        |   defer nc.Close()
+        |
+        |   subj, msg := args[0], []byte(args[1])
+        |
+        |   nc.Publish(subj, msg)
+        |   nc.Flush()
+        |
+        |   if err := nc.LastError(); err != nil {
+        |     log.Fatal(err)
+        |   } else {
+        |     log.Printf("Published [%s] : '%s'\n", subj, msg)
+        |   }
+        | }
+    pre.code-item.csharp.is-hidden
+      code.csharp
+        | using System;
+        | using System.Collections.Generic;
+        | using System.Linq;
+        | using System.Text;
+        | using System.Threading.Tasks;
+        |
+        | // Reference the NATS client
+        | using NATS.Client;
+        |
+        | // Create a new connection factory to create a connection.
+        | ConnectionFactory cf = new ConnectionFactory();
+        |
+        | // Creates a live connection to the default
+        | // NATS Server running locally
+        | IConnection c = cf.CreateConnection();
+        |
+        | c.Publish("foo", Encoding.UTF8.GetBytes("hello world"));
+        |
+        | // Closing a connection
+        | c.Close();
+    pre.code-item.java.is-hidden
+      code.java
+        | import io.nats.client.*;
+        |
+        | // Connect to default URL ("nats://localhost:4222")
+        | Connection nc = Nats.connect();
+        |
+        | // Simple Publisher
+        | nc.publish("foo", "Hello World".getBytes());
+        |
+        | // Close connection
+        | nc.close();
+  div.content.pt4
+    h4 A simple consumer
+  div.tabs
+    ul.tab-list
+      li.is-active.code-item.go(onClick="showCode('go');")
+        a Go
+      li.code-item.java(onClick="showCode('java');")
+        a Java
+      li.code-item.csharp(onClick="showCode('csharp');")
+        a C#
+  pre.code-item.go
+    code.go
+      | package main
+      |
+      | import (
+      |         "log"
+      |
+      |         "github.com/nats-io/go-nats"
+      | )
+      |
+      | func main() {
+      |   nc, err := nats.Connect(*urls)
+      |   if err != nil {
+      |     log.Fatal(err)
+      |   }
+      |
+      |   subj, msg := args[0], []byte(args[1])
+      |
+      |   nc.Subscribe(subj, func(msg *nats.Msg) {
+      |   })
+      |   nc.Flush()
+      |
+      |   if err := nc.LastError(); err != nil {
+      |     log.Fatal(err)
+      |   } else {
+      |     log.Printf("Published [%s] : '%s'\n", subj, msg)
+      |   }
+      | }
+  pre.code-item.java.is-hidden
+    code.java
+      | import io.nats.client.*;
+      |
+      | // Connect to default URL ("nats://localhost:4222")
+      | Connection nc = Nats.connect();
+      |
+      | // Simple Async Subscriber
+      | nc.subscribe("foo", m -> {
+      |   System.out.printf("Received a message: %s\n", new String(m.getData()));
+      | });
+  pre.code-item.csharp.is-hidden
+    code.csharp
+      | using System;
+      | using System.Collections.Generic;
+      | using System.Linq;
+      | using System.Text;
+      | using System.Threading.Tasks;
+      |
+      | // Reference the NATS client
+      | using NATS.Client;
+      |
+      | // Create a new connection factory to create a connection.
+      | ConnectionFactory cf = new ConnectionFactory();
+      |
+      | // Creates a live connection to the default
+      | // NATS Server running locally
+      | IConnection c = cf.CreateConnection();
+      |
+      | // Setup an event handler to process incoming messages.
+      | // An anonymous delegate function is used for brevity.
+      | EventHandler<MsgHandlerEventArgs> h = (sender, args) =>
+      | {
+      |   // print the message
+      |   Console.WriteLine(args.Message);
+      |
+      |   // Here are some of the accessible properties from
+      |   // the message:
+      |   // args.Message.Data;
+      |   // args.Message.Reply;
+      |   // args.Message.Subject;
+      |   // args.Message.ArrivalSubcription.Subject;
+      |   // args.Message.ArrivalSubcription.QueuedMessageCount;
+      |   // args.Message.ArrivalSubcription.Queue;
+      |
+      |   // Unsubscribing from within the delegate function is supported.
+      |   args.Message.ArrivalSubcription.Unsubscribe();
+      | };
+      |
+      | // The simple way to create an asynchronous subscriber
+      | // is to simply pass the event in.  Messages will start
+      | // arriving immediately.
+      | IAsyncSubscription s = c.SubscribeAsync("foo", h);
+      |
+      | // Closing a connection
+      | c.Close();

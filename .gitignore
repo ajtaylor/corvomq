@@ -21,6 +21,9 @@ css/tachyons/
 css/dist/
 css/wysiwyg/
 css/wt
+css/out/
+css/tailwind.js
+css/tt.css
 
 # sqitch
 db/sqitch.conf
